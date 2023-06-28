@@ -1,0 +1,4 @@
+singleServerConfig:
+  address: redis://localhost:6000
+  connectionPoolSize: 10
+  connectionMinimumIdleSize: 10

@@ -1,0 +1,146 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="taffetaearth (generated)" id="1687815950118-1">
+        <createTable tableName="album">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="album_pkey"/>
+            </column>
+            <column name="album_art_url" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="artist_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-2">
+        <createTable tableName="artist">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="artist_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="photo_url" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-3">
+        <createTable tableName="comment">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="comment_pkey"/>
+            </column>
+            <column name="content" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="song_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-4">
+        <createTable tableName="genre">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="genre_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="photo_url" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-5">
+        <createTable tableName="liked">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="song_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-6">
+        <createTable tableName="playlist">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="playlist_pkey"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-7">
+        <createTable tableName="song">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="song_pkey"/>
+            </column>
+            <column name="link" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="album_id" type="BIGINT"/>
+            <column name="artist_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-8">
+        <createTable tableName="song_genre">
+            <column name="song_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="genre_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-9">
+        <createTable tableName="song_playlist">
+            <column name="playlist_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="song_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-10">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="users_pkey"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="full_name" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="username" type="VARCHAR(15)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-11">
+        <addUniqueConstraint columnNames="username" constraintName="uk_r43af9ap4edm43mmtq01oddj6" tableName="users"/>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-12">
+        <addForeignKeyConstraint baseColumnNames="song_id" baseTableName="song_playlist" constraintName="fk1ct80f4nsi2lts6j4pmd4ric8" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="song" validate="true"/>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-13">
+        <addForeignKeyConstraint baseColumnNames="song_id" baseTableName="song_genre" constraintName="fk1ssu87dg5vsdxpmyjqqc42if3" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="song" validate="true"/>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-14">
+        <addForeignKeyConstraint baseColumnNames="artist_id" baseTableName="song" constraintName="fka21ft97nj7thwrp5d31xdaxr" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="artist" validate="true"/>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-15">
+        <addForeignKeyConstraint baseColumnNames="song_id" baseTableName="comment" constraintName="fkbkwibkxkhbevo3yg3aoxh3vmy" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="song" validate="true"/>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-16">
+        <addForeignKeyConstraint baseColumnNames="playlist_id" baseTableName="song_playlist" constraintName="fkbo28ki79m3naf7970431wrls6" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="playlist" validate="true"/>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-17">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="liked" constraintName="fkcc0jrw2vianbjig6suh66syiw" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-18">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="playlist" constraintName="fkj8q80g2puy49wsp49p3taqllv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-19">
+        <addForeignKeyConstraint baseColumnNames="genre_id" baseTableName="song_genre" constraintName="fkmpuht870e976moxtxywrfngcr" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="genre" validate="true"/>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-20">
+        <addForeignKeyConstraint baseColumnNames="artist_id" baseTableName="album" constraintName="fkmwc4fyyxb6tfi0qba26gcf8s1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="artist" validate="true"/>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-21">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="comment" constraintName="fkqm52p1v3o13hy268he0wcngr5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-22">
+        <addForeignKeyConstraint baseColumnNames="song_id" baseTableName="liked" constraintName="fkqwh6l79095jao943edoit9e8s" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="song" validate="true"/>
+    </changeSet>
+    <changeSet author="taffetaearth (generated)" id="1687815950118-23">
+        <addForeignKeyConstraint baseColumnNames="album_id" baseTableName="song" constraintName="fkrcjmk41yqj3pl3iyii40niab0" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="album" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
